@@ -1,5 +1,5 @@
 {
     "rewrites": [
-        { "source": "/hooks/:product", "destination": "/api/bot/feishu" }
+        { "source": "/hooks/:product", "destination": "/api/txc" }
     ]
 }
