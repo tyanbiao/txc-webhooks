@@ -34,7 +34,7 @@ function handleMessage(name: string, data: any): string {
     return `${name}有${action}: ${content}`
 }
 
-async function main(req: VercelRequest, res: VercelResponse) {
+function main(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST')
         return res.status(405).end('Method Not Allowed')
@@ -44,10 +44,10 @@ async function main(req: VercelRequest, res: VercelResponse) {
         const product = req.query.product.toString() || 'Unknown'
         const content = handleMessage(product, req.body)
         if (bots.indexOf('TELEGRAM') >= 0) {
-          await sendToTelegram(content)
+          sendToTelegram(content)
         }
         if (bots.indexOf('FEISHU') >= 0) {
-          await sendToFeishu(content)
+          sendToFeishu(content)
         }
         return res.status(200).end('ok')
     } catch (e) {
