@@ -1,4 +1,6 @@
-async function sendToFeishu(content: string) {
+import fetch from 'node-fetch'
+
+export async function sendToFeishu(content: string) {
   const URL = `https://open.feishu.cn/open-apis/bot/v2/hook/${process.env.FEISHU_TOKEN}`
   const body = JSON.stringify({
       "msg_type": "text",

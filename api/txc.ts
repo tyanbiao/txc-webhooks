@@ -1,4 +1,6 @@
 import {VercelRequest, VercelResponse} from '@vercel/node'
+import { sendToTelegram } from '../bot/telegram'
+import { sendToFeishu } from '../bot/feishu'
 
 function handleMessage(name: string, data: any): string {
     let action = ''
@@ -25,7 +27,9 @@ function handleMessage(name: string, data: any): string {
             content = data?.payload?.reply?.content
             break
         default:
-            throw new Error('Bad Request')
+            action = data.type
+            content = JSON.stringify(data?.payload)
+            break
     }
     return `${name}有${action}: ${content}`
 }
